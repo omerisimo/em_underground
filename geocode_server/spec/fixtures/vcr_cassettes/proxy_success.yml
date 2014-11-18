@@ -1,0 +1,105 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Yigal%20Alon%2098%20Tel%20Aviv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 18 Nov 2014 22:08:01 GMT
+      Expires:
+      - Wed, 19 Nov 2014 22:08:01 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic,p=0.01
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "98",
+                       "short_name" : "98",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Yigal Alon Street",
+                       "short_name" : "Yigal Alon Street",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Tel Aviv-Yafo",
+                       "short_name" : "ת\"א",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Tel Aviv District",
+                       "short_name" : "Tel Aviv District",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Israel",
+                       "short_name" : "IL",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Yigal Alon Street 98, Tel Aviv-Yafo, Israel",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 32.0701275,
+                          "lng" : 34.7938112
+                       },
+                       "southwest" : {
+                          "lat" : 32.070123,
+                          "lng" : 34.7937936
+                       }
+                    },
+                    "location" : {
+                       "lat" : 32.070123,
+                       "lng" : 34.7938112
+                    },
+                    "location_type" : "RANGE_INTERPOLATED",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 32.07147423029149,
+                          "lng" : 34.7951513802915
+                       },
+                       "southwest" : {
+                          "lat" : 32.06877626970849,
+                          "lng" : 34.7924534197085
+                       }
+                    }
+                 },
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 22:08:01 GMT
+recorded_with: VCR 2.9.3

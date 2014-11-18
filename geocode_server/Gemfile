@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'em-http-request'
+gem 'eventmachine_httpserver'
+gem 'em-synchrony'
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+  gem 'em-spec'
+end

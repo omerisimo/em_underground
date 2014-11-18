@@ -1,0 +1,1 @@
+require 'geocode/proxy'

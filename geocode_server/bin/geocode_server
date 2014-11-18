@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+lib = File.join(File.dirname(__FILE__), '..', 'lib')
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require 'eventmachine'
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'geocode'))
+
+EM.run do
+  EM.start_server("0.0.0.0", 8080, Geocode::Proxy)
+  puts "Server running on port 8080"
+end
