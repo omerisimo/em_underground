@@ -8,24 +8,31 @@ The server takes an address as parameter, searches [Google Geocode API](https://
 
 execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 ## Usage
 
 Start the server
 
-
-    $ bundle exec bin/geocode_server
+```sh
+$ bundle exec bin/geocode_server
+```
 
 Curl to see results
 
-    $ curl -i "http://localhost:8080/?address=Yigal%20Alon%2098"
-    HTTP/1.1 200 ...
-    Content-length: 120
-    Content-type: application/json
+```sh
+$ curl -i "http://localhost:8080/?address=Yigal%20Alon%2098"
+HTTP/1.1 200 ...
+Content-length: 120
+Content-type: application/json
 
-    {"status":"success","address":"Yigal Alon Street 98, Tel Aviv-Yafo, Israel","latitude":32.070123,"longitude":34.7938112}%
+{"status":"success","address":"Yigal Alon Street 98, Tel Aviv-Yafo, Israel","latitude":32.070123,"longitude":34.7938112}%
+```
 
 ## Test
 
-    $ bundle exec rspec spec
+```sh
+$ bundle exec rspec spec
+```
