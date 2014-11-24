@@ -11,15 +11,7 @@ module Geocode
       address = params['address']
   
       geocode = GoogleClient.new
-      geocode.coordinates_for(address)
-
-      geocode.callback do |results|
-        respond_with(results)
-      end
-
-      geocode.errback do |results|
-        respond_with(results)
-      end
+      geocode.coordinates_for(address, &method(:respond_with))
     end
 
     private

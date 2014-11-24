@@ -1,25 +1,19 @@
-require 'em-http-request'
+require 'em-synchrony'
+require 'em-synchrony/em-http'
 require 'json'
 
 module Geocode
   class GoogleClient
-    include EM::Deferrable
 
     GOOGLE_GEOCODE_URI = "https://maps.googleapis.com/maps/api/geocode/json"
 
     def coordinates_for(address)
-      puts "Searching for address: #{address}"
-      data = { address: address }
-      http = EM::HttpRequest.new(GOOGLE_GEOCODE_URI).get :query => data
-
-      http.callback do
+      EM.synchrony do
+        puts "Searching for address: #{address}"
+        data = { address: address }
+        http = EM::HttpRequest.new(GOOGLE_GEOCODE_URI).get :query => data
         results = parse_response http, address
-        succeed results
-      end
-
-      http.errback do
-        puts "Received an error '#{http.error}' for address: #{address}"
-        fail({ status: 'error', message: http.error })
+        yield results
       end
       self
     end
@@ -27,6 +21,10 @@ module Geocode
     private
 
     def parse_response(response, address)
+      if(response.error)
+        puts "Received an error '#{response.error}' for address: #{address}"
+        return { status: 'error', message: response.error }
+      end
       results = JSON.parse response.response
       if results["status"] == "ZERO_RESULTS"
         puts "No results found for address: #{address}"

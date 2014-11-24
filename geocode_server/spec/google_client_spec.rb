@@ -8,8 +8,7 @@ describe Geocode::GoogleClient do
   it "returns the address and coordinates for a valid address" do
     VCR.use_cassette('address_for_success') do
       em do
-        geocode = Geocode::GoogleClient.new.coordinates_for "Yigal Alon 98, Tel Aviv"
-        geocode.callback do |results|
+        geocode = Geocode::GoogleClient.new.coordinates_for "Yigal Alon 98, Tel Aviv" do |results|
           expect(results).to eq({ status: 'success',
                                   address: "Yigal Alon Street 98, Tel Aviv-Yafo, Israel",
                                   latitude: 32.070123,
@@ -24,8 +23,7 @@ describe Geocode::GoogleClient do
   it "it returns no results for invalid address" do
     VCR.use_cassette('invalid_address') do
       em do
-        geocode = Geocode::GoogleClient.new.coordinates_for 'bad address'
-        geocode.callback do |results|
+        geocode = Geocode::GoogleClient.new.coordinates_for 'bad address' do |results|
           expect(results).to eq({ status: 'no_results_found' })
           done
         end
@@ -36,8 +34,7 @@ describe Geocode::GoogleClient do
   it "it fails when the HTTP request fails" do
     stub_request(:get, /maps.googleapis.com/).to_timeout
     em do
-      geocode = Geocode::GoogleClient.new.coordinates_for "Yigal Alon 98 Tel Aviv"
-      geocode.errback do |results|
+      geocode = Geocode::GoogleClient.new.coordinates_for "Yigal Alon 98 Tel Aviv" do |results|
         expect(results).to eq({ status: 'error', message: 'WebMock timeout error' })
         done
       end
